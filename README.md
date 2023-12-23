@@ -1,7 +1,9 @@
 # Stochastic Online Scheduling
 
 ## Description
-*Work in progress*: Master project on "Stochastic Online Scheduling on Parallel Machines".
+*Work in progress*: 
+
+Master project on "Stochastic Online Scheduling on Parallel Machines".
 
 This reposotory contains the simulation code for testing the thoretical bound stated in "Stochastic online scheduling revisited"[1] and proved in the Master project.
 
