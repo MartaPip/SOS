@@ -89,7 +89,7 @@ def convert_all(fixed_release_par,upper_release_par,N,M,Distributions,type,ratio
     #folders = [f for f in os.listdir(repository_path) if os.path.isdir(os.path.join(repository_path, f))]
     fix="n"
     if fixed_release_par: fix="fix"
-    path_save=os.path.join(f"results_{fix}{upper_release_par}","summary")
+    path_save=os.path.join("Results",f"results_{fix}{upper_release_par}","summary")
     
     if not os.path.exists(path_save):
             # Create the directory if it doesn't exist
@@ -105,7 +105,7 @@ def convert_all(fixed_release_par,upper_release_par,N,M,Distributions,type,ratio
                     CV=math.exp(sigma2)-1
                     CV=round(CV)
         if distribution=="deterministic":CV=0
-        repository_path = os.path.join(f"results_{fix}{upper_release_par}",distribution)
+        repository_path = os.path.join("Results",f"results_{fix}{upper_release_par}",distribution)
 
 
         #for each algorithm:

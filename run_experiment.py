@@ -12,7 +12,7 @@ from job_class import Job,Job_b
 from run_one import run_one, run_one_both, run_one_both_fast
 import pickle
 from convert import convert_all 
-from analysis import make_plot, make_plot_asymptotic
+from analysis import make_plot
 
 def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
     np.random.seed(10)
@@ -100,7 +100,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
             result_istance.append([total_RSOS,total_DSOS,total_LR,basic_LB])
         results.append(result_istance)
     
-    directory_path= os.path.join(f"results_{fix}{upper_release_par}",distribution,'m_'+str(m))
+    directory_path= os.path.join("Results",f"results_{fix}{upper_release_par}",distribution,'m_'+str(m))
     name=f"results_m_{m}_n_{n}_{distribution}_{round(CV,2)}.csv"
     file_path = os.path.join(directory_path, name)
     if not os.path.exists(directory_path):

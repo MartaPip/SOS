@@ -14,7 +14,7 @@ method="RSOS"
 def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alpha=(( 1 + math.sqrt(5) ) / 2), Delta_try=10):
     fix="n"
     if fixed_release_par: fix="fix"
-    path=os.path.join(f"results_{fix}{upper_release_par}","summary")
+    path=os.path.join("Results",f"results_{fix}{upper_release_par}","summary")
     if distribution=="d_uniform": 
          CV=1/3
          name_distribution="Uniform"
@@ -54,7 +54,7 @@ def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alph
 
     #plt.show()
 
-    save_folder = os.path.join(f"results_{fix}{upper_release_par}","plots")
+    save_folder = os.path.join("Results",f"results_{fix}{upper_release_par}","plots")
 
     # Create the folder if it doesn't exist
     if not os.path.exists(save_folder):
@@ -64,10 +64,12 @@ def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alph
     plt.savefig(os.path.join(save_folder, f"{distribution}_{method}_{round(CV,2)}.png"))
     plt.close()
 
+    
+'''''
 def make_plot_asymptotic(distribution,method, fixed_release_par,upper_release_par, alpha=(( 1 + math.sqrt(5) ) / 2), Delta_try=10):
     fix="n"
     if fixed_release_par: fix="fix"
-    path=os.path.join(f"results_{fix}{upper_release_par}","summary")
+    path=os.path.join("Results",f"results_{fix}{upper_release_par}","summary")
     if distribution=="d_uniform": CV=1/3
     if distribution=="exponential":CV=1
     if distribution=="log_normal":
@@ -99,7 +101,7 @@ def make_plot_asymptotic(distribution,method, fixed_release_par,upper_release_pa
 
     #plt.show()
 
-    save_folder = os.path.join(f"results_{fix}{upper_release_par}","plots")
+    save_folder = os.path.join("Results",f"results_{fix}{upper_release_par}","plots")
 
     # Create the folder if it doesn't exist
     if not os.path.exists(save_folder):
@@ -112,3 +114,4 @@ def make_plot_asymptotic(distribution,method, fixed_release_par,upper_release_pa
 #for distribution in ["d_uniform","exponential","log_normal","deterministic"]:
  #       for method in ["DSOS","RSOS"]:
  #           make_plot(distribution,method,(( 1 + math.sqrt(5) ) / 2), Delta_try)
+'''
