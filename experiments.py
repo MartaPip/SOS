@@ -29,7 +29,7 @@ M=[1,2,5,10]
 Distributions=["d_uniform","exponential","log_normal","deterministic"]
 #Distributions=["exponential","log_normal"]
 #M=[5,10]
-#N=[10000]
+N=[5000]
 Delta_try=10
 
 golden_ratio=( 1 + math.sqrt(5) ) / 2
@@ -52,7 +52,7 @@ for distribution in Distributions:
             run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
             print(f"finished for distribution {distribution} withe {m} machines and {n} jobs")
 
-N=[10,20,50,100,200,500,1000,2000,10000]
+N=[10,20,50,100,200,500,1000,2000,5000]
 convert_all(fixed_release_par,upper_release_par,N,M,Distributions,type,ratio,alpha_DSOS,Delta_try)
 
 #N=[10,20,50,100,200,500,1000,2000]
@@ -60,7 +60,7 @@ for distribution in Distributions:
     for method in ["DSOS","RSOS"]:
         if method=="DSOS": N=[10,20,50,100,200,500,1000]
         elif distribution=="log_normal": N=[10,20,50,100,200,500,1000,2000]
-        else: N=[10,20,50,100,200,500,1000,2000,10000]
+        else: N=[10,20,50,100,200,500,1000,2000,5000]
         if type=="asymptotic": make_plot_asymptotic(distribution,method, fixed_release_par,upper_release_par,alpha_DSOS, Delta_try)
         else: make_plot(N,M,distribution,method, fixed_release_par,upper_release_par,alpha_DSOS, Delta_try)
 
