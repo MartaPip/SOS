@@ -6,38 +6,60 @@ Master project on "Stochastic Online Scheduling on Parallel Machines".
 
 This reposotory contains the simulation code for testing the thoretical bound stated in "Stochastic online scheduling revisited"[1] and proved in the Master project.
 
-## Installation
+## Setup
+
+```bash
+
 git clone git@github.com:MartaPip/Stochastic-Online-Scheduling.git
+
 cd Stochastic-Online-Scheduling
+
 conda env create -f environment.yml
+
 conda activate Tesi_env
 
-## Usuage
-**TO DO**: after having the main results--> modify code to use  *argparse* ()
+```
 
-To run the experiments adapt the following parameters in the *experiments.py* file:\\
-- *N=[10,20,50,100,200,500,1000]* array containing the number of jobs to consider in the simulations.
+## Running the exoeriments
+**TO DO**: After obtaining the main results, modify the code to incorporate *argparse* for more flexible parameter handling.
 
-- *M=[1,2,5,10]* array containing the number of machine to consider in the simulations.
-
-- *Distributions=["d_uniform","exponential","log_normal","deterministic"]* array contating the name of the distribution to consider in the simulations.
+To run the experiments, adjust the following parameters in the *experiments.py* file and execute it:
 
 
-- *fixed_release_par $\in [True,False]$*  True if the upper bound of the release time of the jobs does not depend on the number of job considered
+- *N=[10,20,50,100,200,500,1000]* array specifying the number of jobs to consider in the simulations.
 
-- *upper_release_par* If fixed_release_par is True it gives the upper bound on the release time. Otherwise the upperbound is give by $n*upper_release_pa$
+- *M=[1,2,5,10]* array specifying the number of machines to consider in the simulations.
 
-- *upper_release_par* upperbound on the weigths of the jobs.
+- *Distributions=["d_uniform","exponential","log_normal","deterministic"]* array specifying the distributions to consider in the simulations.
 
-- *alpha_DSOS* the alpha considered in the $DSOS$ algorithm, by default it is $golden ratio-1$.
+- *fixed_release_par* A Boolean parameter (True or False) indicating whether the upper bound of the release time of the jobs depends on the number of jobs considered.
 
-- *Delta_try* the $\Delta$ (upper_bound on the coefficient of variation) that is considered when running simulations wuth the log-normal distribution.  By defauly it is 10.
+- *upper_release_par* If fixed_release_par is True, it specifies the upper bound on the release time. Otherwise, the upper bound is calculated as $n \times$ upper_release_par.
+
+- *upper_release_we* upperbound on the weigths of the jobs.
+
+- *alpha_DSOS* the alpha considered in the $DSOS$ algorithm, by default it is *golden ratio* $-1$.
+
+- *Delta_try* The upper bound on the coefficient of variation considered when running simulations with the log-normal distribution. The default value is 10.
+
+*NOTE:* Additional parameters can be modified to adapt the plots or the type of comparison between our solution and the lower bound on the optimal solution.
+## Outputs
+
+- **run_experiment**: Runs a simulation for a specific combination of parameters, creating a table containing the results of the DSOS and RSOS algorithms, as well as two lower bounds on the optimal solutions for each scenario and realization.
+  
+- **convert_all**: Takes the tables created by *run_experiment* and creates a summary table with the ratio evaluated for different combinations of the values in N and M.
+  
+- **make_plot**: Takes the table created by convert_all to generate the final plots.
+
+
+
 
 
 
 
 ## Source
 [1] Schulz, Andreas S. "Stochastic online scheduling revisited." International Conference on Combinatorial Optimization and Applications. Berlin, Heidelberg: Springer Berlin Heidelberg, 2008.
+
 [2]
 
 
