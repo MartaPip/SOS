@@ -33,9 +33,6 @@ Printing=False
 
 ################################################ adapt parameters for simulations################################################
 Distributions=["exponential"]
-#plot parameters
-NP=[10,20,50,100,200,500,1000]
-MP=[1,2,5,10]
 #simulation parametrs
 N=[10,20,50,100,200,500,1000]
 M=[1,2,5,10]
@@ -46,6 +43,13 @@ fixed_release_par=False
 #type="asymptotic"
 type="standard"
 ratio="max"
+
+#plot parameters
+MP=M
+NP=N
+#NP=[10,20,50,100,200,500,1000]
+#MP=[1,2,5,10]
+
 ################################################################################################################################################
 for distribution in Distributions:
     for m in M:
