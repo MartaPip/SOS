@@ -1,5 +1,5 @@
-# Stochastic Online Scheduling
-**Work in progress**: 
+#  Work in progress: *Stochastic Online Scheduling* 
+
 
 ## Description
 Master project on "Stochastic Online Scheduling on Parallel Machines".
@@ -47,7 +47,7 @@ To run the experiments, adjust the following parameters in the *experiments.py* 
 
 - **run_experiment**: Runs a simulation for a specific combination of parameters, creating a table containing the results of the DSOS and RSOS algorithms, as well as two lower bounds on the optimal solutions for each scenario and realization.
   
-- **convert_all**: Takes the tables created by *run_experiment* and creates a summary table with the ratio evaluated for different combinations of the values in N and M.
+- **convert_all**: Takes the tables created by *run_experiment* and creates a summary table with the ratio evaluated for different combinations of the values in N and M for each algorithm.
   
 - **make_plot**: Takes the table created by convert_all to generate the final plots.
 
