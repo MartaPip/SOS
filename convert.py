@@ -79,7 +79,7 @@ def calculate_ratio_step(df,method,CV,alpha):
 
     
 
-def convert_all(fixed_release_par,upper_release_par,N,M,Distributions,type,ratio,alpha,Delta_try=10):
+def convert_all(fixed_release_par,upper_release_par,upper_we,N,M,Distributions,mean,type,ratio,alpha,Delta_try=10):
     MA=[1,2,5,10]
     NU=[10,20,50,100,200,500,1000]
     #Distributions=["d_uniform","exponential","log_normal","deterministic"]
@@ -89,23 +89,24 @@ def convert_all(fixed_release_par,upper_release_par,N,M,Distributions,type,ratio
     #folders = [f for f in os.listdir(repository_path) if os.path.isdir(os.path.join(repository_path, f))]
     fix="n"
     if fixed_release_par: fix="fix"
-    path_save=os.path.join("Results",f"results_{fix}{upper_release_par}","summary")
+    path_save=os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}","summary")
     
     if not os.path.exists(path_save):
             # Create the directory if it doesn't exist
             os.makedirs(path_save)
 
     # create table m x n for each distribution
-    
     for distribution in Distributions:
+        print(distribution)
         if distribution=="d_uniform": CV=1/3
-        if distribution=="exponential":CV=1
+        if distribution=="exponential": CV=1
         if distribution=="log_normal":
                     sigma2=math.log(Delta_try+1)
                     CV=math.exp(sigma2)-1
                     CV=round(CV)
         if distribution=="deterministic":CV=0
-        repository_path = os.path.join("Results",f"results_{fix}{upper_release_par}",distribution)
+        #print(CV)
+        repository_path = os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}",distribution)
 
 
         #for each algorithm:

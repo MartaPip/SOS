@@ -24,21 +24,21 @@ MP=[1,2,5,10]
 N=[10,20,50,100,200,500,1000]
 M=[1,2,5,10]
 golden_ratio=( 1 + math.sqrt(5) ) / 2
-
+mean=10
 upper_we=30
 time_step=1
 Printing=False
 
 
 
-################################################ adapt parameters for simulations################################################
-Distributions=["exponential"]
+################################################ adapt parameters for simulations################################################à
+#Distributions=["log_normal"]
 #simulation parametrs
-N=[10,20,50,100,200,500,1000]
-M=[1,2,5,10]
+#N=[1000]
+#M=[1,2,5,10]
 alpha_DSOS=golden_ratio-1
 Delta_try=10
-upper_release_par=5
+upper_release_par=4
 fixed_release_par=False
 #type="asymptotic"
 type="standard"
@@ -51,18 +51,83 @@ NP=N
 #MP=[1,2,5,10]
 
 ################################################################################################################################################
-for distribution in Distributions:
+for distribution in Distributions:                
     for m in M:
         for n in N:
-            run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
+            run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
             print(f"finished for distribution {distribution} withe {m} machines and {n} jobs")
- 
-convert_all(fixed_release_par,upper_release_par,NP,MP,Distributions,type,ratio,alpha_DSOS,Delta_try)
-for distribution in Distributions:
+    
+    convert_all(fixed_release_par,upper_release_par,upper_we,NP,MP,[distribution],mean,type,ratio,alpha_DSOS,Delta_try)
     for method in ["DSOS","RSOS"]:
-        make_plot(NP,MP,distribution,method, fixed_release_par,upper_release_par,alpha_DSOS, Delta_try)
+        make_plot(NP,MP,distribution,mean,method, fixed_release_par,upper_release_par,upper_we,alpha_DSOS, Delta_try)
 
 
+
+''''
+for scenario in [[[50],False,[10],[30]]]:
+    fixed_release_par=scenario[1]
+    for upper_release in scenario[2]:
+        upper_release_par=upper_release
+        for means in scenario[0]:
+            mean=means
+            for we in scenario[3]:
+                upper_we=we
+                print("CONSIDERING: mean",mean,"weihths",upper_we,"Release",upper_release_par,fixed_release_par)
+                for distribution in Distributions:
+                               
+                    for m in M:
+                        for n in N:
+                            run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
+                            print(f"finished for distribution {distribution} withe {m} machines and {n} jobs")
+                    
+                    A=[10,20,50,100,200,500]
+                    #convert_all(fixed_release_par,upper_release_par,upper_we,NP,MP,[distribution],mean,type,ratio,alpha_DSOS,Delta_try)
+                    for method in ["DSOS","RSOS"]:
+                        make_plot(A,MP,distribution,mean,method, fixed_release_par,upper_release_par,upper_we,alpha_DSOS, Delta_try)
+'''
+'''
+for scenario in [[[100,75,200],False,[1],[30]],[[50],True,[10],[30]]]:
+    fixed_release_par=scenario[1]
+    for upper_release in scenario[2]:
+        upper_release_par=upper_release
+        for means in scenario[0]:
+            mean=means
+            for we in scenario[3]:
+                upper_we=we
+                print("CONSIDERING: mean",mean,"weihths",upper_we,"Release",upper_release_par,fixed_release_par)
+                for distribution in Distributions:                
+                    for m in M:
+                        for n in N:
+                            run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
+                            print(f"finished for distribution {distribution} withe {m} machines and {n} jobs")
+                    
+                    convert_all(fixed_release_par,upper_release_par,upper_we,NP,MP,[distribution],mean,type,ratio,alpha_DSOS,Delta_try)
+                    for method in ["DSOS","RSOS"]:
+                        make_plot(NP,MP,distribution,mean,method, fixed_release_par,upper_release_par,upper_we,alpha_DSOS, Delta_try)
+
+'''
+'''
+Distributions=["d_uniform","exponential","log_normal","deterministic"]
+Delta_try=20
+for scenario in [[[100],False,[3],[30]],[[100],True,[30,100],[30]]]:
+    fixed_release_par=scenario[1]
+    for upper_release in scenario[2]:
+        upper_release_par=upper_release
+        for means in scenario[0]:
+            mean=means
+            for we in scenario[3]:
+                upper_we=we
+                print("CONSIDERING: mean",mean,"weihths",upper_we,"Release",upper_release_par,fixed_release_par)
+                for distribution in Distributions:                
+                    for m in M:
+                        for n in N:
+                            run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try)
+                            print(f"finished for distribution {distribution} withe {m} machines and {n} jobs")
+                    
+                    convert_all(fixed_release_par,upper_release_par,upper_we,NP,MP,[distribution],mean,type,ratio,alpha_DSOS,Delta_try)
+                    for method in ["DSOS","RSOS"]:
+                        make_plot(NP,MP,distribution,mean,method, fixed_release_par,upper_release_par,upper_we,alpha_DSOS, Delta_try)
+'''
 
 
 

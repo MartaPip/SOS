@@ -14,7 +14,7 @@ import pickle
 from convert import convert_all 
 from analysis import make_plot
 
-def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
+def run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
     np.random.seed(10)
     random.seed(10)
     results=[]
@@ -36,7 +36,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
         if distribution=="d_uniform":
             CV=1/3
             for x in range(n):
-                expected=randint(1,50)
+                expected=randint(1,mean)
                 release=randint(0,upper_release)  
                 we=random.uniform(0, upper_we)
                 job=Job_b(x,release,expected,CV,we)
@@ -44,7 +44,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
         if distribution=="exponential":
             CV=1
             for x in range(n):
-                expected=randint(1,50)
+                expected=randint(1,mean)
                 release=randint(0,upper_release)
                 we=random.uniform(0, upper_we)
                 job=Job_b(x,release,expected,CV,we)
@@ -54,7 +54,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
             CV=math.exp(sigma2)-1
             CV=round(CV)
             for x in range(n):
-                expected=randint(1,50)
+                expected=randint(1,mean)
                 release=randint(0,upper_release)  
                 we=random.uniform(0, upper_we)
                 job=Job_b(x,release,expected,CV,we)
@@ -63,7 +63,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
         if distribution=="deterministic":
             CV=0
             for x in range(n):
-                expected=randint(1,50)
+                expected=randint(1,mean)
                 release=randint(0,upper_release)  
                 we=random.uniform(0, upper_we)
                 job=Job_b(x,release,expected,CV,we)
@@ -100,7 +100,7 @@ def run_experiment(m,n,distribution,alpha_DSOS,fixed_release_par,upper_release_p
             result_istance.append([total_RSOS,total_DSOS,total_LR,basic_LB])
         results.append(result_istance)
     
-    directory_path= os.path.join("Results",f"results_{fix}{upper_release_par}",distribution,'m_'+str(m))
+    directory_path= os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}",distribution,'m_'+str(m))
     name=f"results_m_{m}_n_{n}_{distribution}_{round(CV,2)}.csv"
     file_path = os.path.join(directory_path, name)
     if not os.path.exists(directory_path):

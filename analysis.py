@@ -11,10 +11,10 @@ method="RSOS"
 
 
 
-def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alpha=(( 1 + math.sqrt(5) ) / 2), Delta_try=10):
+def make_plot(N,M,distribution,mean,method, fixed_release_par,upper_release_par,upper_we, alpha=(( 1 + math.sqrt(5) ) / 2), Delta_try=10):
     fix="n"
     if fixed_release_par: fix="fix"
-    path=os.path.join("Results",f"results_{fix}{upper_release_par}","summary")
+    path=os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}","summary")
     if distribution=="d_uniform": 
          CV=1/3
          name_distribution="Uniform"
@@ -54,7 +54,7 @@ def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alph
 
     #plt.show()
 
-    save_folder = os.path.join("Results",f"results_{fix}{upper_release_par}","plots")
+    save_folder = os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}","plots")
 
     # Create the folder if it doesn't exist
     if not os.path.exists(save_folder):
@@ -64,7 +64,7 @@ def make_plot(N,M,distribution,method, fixed_release_par,upper_release_par, alph
     plt.savefig(os.path.join(save_folder, f"{distribution}_{method}_{round(CV,2)}.png"))
     plt.close()
 
-    
+
 '''''
 def make_plot_asymptotic(distribution,method, fixed_release_par,upper_release_par, alpha=(( 1 + math.sqrt(5) ) / 2), Delta_try=10):
     fix="n"
