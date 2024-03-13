@@ -14,25 +14,46 @@ import pickle
 from convert import convert_all 
 from analysis import make_plot
 
-def run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
+def run_experiment(m,n,distribution,mean,alpha_DSOS,Tigth_analysis,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
+    ###############################################################################################################################
+    ####################################################INPUT:#####################################################################
+    #m,n               = numbers machines and jobs in the simulation
+    #distribution      = processing time distribution  in the simulation 
+    #mean              = Upper bound on mean of the processing time distribution
+    #alpha_DSOS        = fixed value \alpha in the DSOS algorith, usually golden_ratio-1
+
+    #Tigth_analysis    = TRUE if the upper bound on the release times depends on m
+    #fixed_release_par = TRUE if the upper bound on the release times is indipendent from m and n
+    #upper_release_par = Parameter influencing upper bound on release time
+    #upper_we          = uppe bound on jobs' weigths
+
+    #instances         = number of istance considere in the simulation
+    #realizations_p    = number realizations of processing times considered for each istance
+    #Delta_try=10      = Parameter influencing the coefficint of varition for the log-normal distribution
+
+
+    ####################################################OUTPUT:#####################################################################
+    #Data frame stored in the Result folder containg the objective value of the RSOS algorith, DSOS algorithm, and the 2 lower bounds for all the instances and realizations
+    ################################################################################################################################
     np.random.seed(10)
     random.seed(10)
     results=[]
+
+    #Define upper bound on release time:
     if fixed_release_par: 
         upper_release=upper_release_par
         fix="fix"
     else: 
         upper_release=n*upper_release_par
         fix="n"
-    problem_istances=[]
-    if distribution=="deterministic": realizations_p=1
+    if Tigth_analysis:
+        upper_release=round(n*upper_release_par*(mean/2)/m) 
+        fix="mn_dependent_"
+
+    #Generate data and run the algorithm
     for i in range(instances):
-        #print("-------------------------------------------------------------------------------------------")
-        #print("------------------------------------------------NEW istance---------------------------------")
-        #print("-------------------------------------------------------------------------------------------")
-        Jobs=[]
+        Jobs=[] #list contsining the jobs
         result_istance=[]
-        #for x in range(n):
         if distribution=="d_uniform":
             CV=1/3
             for x in range(n):
@@ -69,12 +90,11 @@ def run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_rele
                 job=Job_b(x,release,expected,CV,we)
                 Jobs.append(job)
                 
-            
+        # simulate realization processing times    
         for j in range(realizations_p):
             
             if distribution=="d_uniform":
                 for k in range(n): Jobs[k].processing=random.uniform(0,round(2*Jobs[k].expected))
-                #for k in range(n): Jobs[k].processing=randint(0,round(2*Jobs[k].expected))
             if distribution=="exponential":
                 for k in range(n): Jobs[k].processing=random.expovariate(1/Jobs[k].expected)
             if distribution=="log_normal":
@@ -84,41 +104,20 @@ def run_experiment(m,n,distribution,mean,alpha_DSOS,fixed_release_par,upper_rele
             if distribution=="deterministic":
                 for k in range(n): Jobs[k].processing=Jobs[k].expected
                     
-            #print("------------------------------------------------NEW Processing---------------------------------")
-            #print("-------------------------------------------------------------------------------------------")
-            #[print(job.we,job.release) for job in Jobs]
+            #Run RSOS and DSOS on simulated data
+            #NOTE: For every realization of the same istance we compute the same lower bounds since the data necessary to construct the LP schedule is the same. 
             total_RSOS,total_DSOS,total_LR,basic_LB=run_one_both_fast(Jobs,m,alpha_DSOS)
-            '''''
-            if (total_RSOS>(2+CV)*total_LR): 
-                print(f"for scenario{i} realizaton {j} RSOS Not fullfiled")
-                problem_istances.append(Jobs)
-                precedence=sorted(Jobs, key=lambda job: (job.we/job.expected), reverse=True)
-                print("precedence:")
-                [print(job.id, job.we/job.expected, job.comp_RSOS,job.we, job.expected) for job in precedence]
-            '''
-            #print("for istance",i,"realization",j,total_RSOS,total_DSOS,total_LR)
             result_istance.append([total_RSOS,total_DSOS,total_LR,basic_LB])
         results.append(result_istance)
-    
+
+    #Store results:
     directory_path= os.path.join("Results",f"results_{fix}{upper_release_par}_mean_{mean}_we_{upper_we}",distribution,'m_'+str(m))
     name=f"results_m_{m}_n_{n}_{distribution}_{round(CV,2)}.csv"
     file_path = os.path.join(directory_path, name)
     if not os.path.exists(directory_path):
-        # Create the directory if it doesn't exist
         os.makedirs(directory_path)
     
     df=pd.DataFrame(results)
     df.to_csv(file_path,index=False)
-    #name_2 = f"results_m_{m}_n_{n}_{distribution}_{round(CV, 2)}.pkl"
-    #file_path_2 = os.path.join(directory_path, name_2)
 
-    #if not os.path.exists(directory_path):
-        # Create the directory if it doesn't exist
-        #os.makedirs(directory_path)
-    #with open(file_path_2, 'wb') as f:
-        #pickle.dump(results, f)
     
-#"""
-
-#m=2
-#distribution="d_uniform"
