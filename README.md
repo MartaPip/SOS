@@ -27,37 +27,37 @@ To run the experiments, adjust the following parameters in the *experiments.py* 
 
 ### Usually fixed:
 
-- *N=[10,20,50,100,200,500,1000]* array specifying the number of jobs to consider in the simulations.
+- **N=[10,20,50,100,200,500,1000]** array specifying the number of jobs to consider in the simulations.
 
-- *M=[1,2,5,10]* array specifying the number of machines to consider in the simulations.
+- **M=[1,2,5,10]** array specifying the number of machines to consider in the simulations.
 
-- *Distributions=["d_uniform","exponential","log_normal","deterministic"]* list specifying the distributions to consider in the simulations.
+- **Distributions=["d_uniform","exponential","log_normal","deterministic"]** list specifying the distributions to consider in the simulations.
 
-- *upper_mean* upper bound on the expected value of the processing times
+- **upper_mean** upper bound on the expected value of the processing times
 
-- *upper_we* upperbound on the weigths of the jobs.
+- **upper_we** upperbound on the weigths of the jobs.
 
-- *alpha_DSOS* the alpha considered in the $DSOS$ algorithm, by default it is *golden ratio* $-1$.
+- **alpha_DSOS** the alpha considered in the $DSOS$ algorithm, by default it is *golden ratio* $-1$.
 
-- *instances* number of istances simulated for each scenario.
+- **instances** number of istances simulated for each scenario.
 
-- *realizations_p* number of realization of the processing times simulatated for each instance
+- **realizations_p** number of realization of the processing times simulatated for each instance
 
-- *Delta_try* The upper bound on the coefficient of variation considered when running simulations with the log-normal distribution. The default value is 10.
+- **Delta_try** The upper bound on the coefficient of variation considered when running simulations with the log-normal distribution. The default value is 10.
 
 ### Select  release time conditions:
 
-- *fixed_release_par* A Boolean parameter (True or False) indicating whether the upper bound of the release time of the jobs depends on the number of jobs considered.
+- **fixed_release_par** A Boolean parameter (True or False) indicating whether the upper bound of the release time of the jobs depends on the number of jobs considered.
 
--*Tigth_analysis*  A Boolean parameter (True or False) indicating whether the upper bound of the release time of the jobs depends on the number of machines considered.
+- **Tigth_analysis**  A Boolean parameter (True or False) indicating whether the upper bound of the release time of the jobs depends on the number of machines considered.
 
-- *upper_release_par* If Tigth_analysis is True the the upper bound on the release time is calculated as $upper_release_par \times \frac{n \cdot upper_we}{2m}$. If fixed_release_par is True, it specifies the upper bound on the release time. Otherwise, the upper bound is calculated as $n \times$ upper_release_par.
+- **upper_release_par** If Tigth_analysis is True the the upper bound on the release time is calculated as upper_release_par $\times$ upper_we $\times \frac{n}{2m}$. If fixed_release_par is True, it specifies the upper bound on the release time. Otherwise, the upper bound is calculated as $n \times$ upper_release_par.
 
 ### Modify summary tables and plot sharacteristics:
 
-- *Summary* $\in \{"Worst", "Average" "Both"\}$ A string indicating if the summery table of the scenario contains worst results among the instances, the average one or both.
+- **Summary $\in$ {"Worst", "Average", "Both"}** A string indicating if the summery table of the scenario contains worst results among the instances, the average one or both.
 
-- *Plot_Worst* A Boolean parameter (True or False) indicating whether the plot illustrate the highes ratio among the istances. When it is False, the average ratio is considered
+- **Plot_Worst** A Boolean parameter (True or False) indicating whether the plot illustrate the highes ratio among the istances. When it is False, the average ratio is considered
 
 .
 ## Outputs
