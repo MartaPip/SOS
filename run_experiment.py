@@ -9,10 +9,9 @@ import random
 from random import randint
 import os
 from job_class import Job,Job_b
-from run_one import run_one, run_one_both, run_one_both_fast
+from run_one import run_one_both_fast
 import pickle
-from convert import convert_all 
-from analysis import make_plot
+
 
 def run_experiment(m,n,distribution,mean,alpha_DSOS,Tigth_analysis,fixed_release_par,upper_release_par,upper_we,instances,realizations_p,Delta_try=10):
     ###############################################################################################################################

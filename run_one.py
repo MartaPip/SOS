@@ -226,7 +226,7 @@ def check_ordered(ordered_job_list, current_time,last_check_time,arrival):
 
     return new_arrivals,arrival
 '''
-########################### CHECK arrival withe fixed time steps: #######################
+########################### CHECK arrival with fixed time steps: #######################
 '''
 def assigment(RANDOM_assigment,job,m,machines):
     ########################################################################################

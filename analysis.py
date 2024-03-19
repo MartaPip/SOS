@@ -81,8 +81,12 @@ def make_plot(N,M,distribution,mean,method, Tigth_analysis,fixed_release_par,upp
     plt.legend()
     plt.xlabel('number of jobs')
     plt.ylabel('performance ratio')
-    if Worst: plt.title(f"Worst case Performance {method} for {name_distribution} Distribution ")
-    else: plt.title(f"Performance {method} for {name_distribution} Distribution ")
+    if Worst: 
+        if name_distribution=="Deterministic": plt.title(f"Worst case performance {method} for {name_distribution} Setting ")
+        else: plt.title(f"Worst case performance {method} for {name_distribution} Distribution ")
+    else: 
+        if name_distribution=="Deterministic": plt.title(f"Performance {method} for {name_distribution} Setting ")
+        else: plt.title(f"Performance {method} for {name_distribution} Distribution ")
 
     #plt.show()
 

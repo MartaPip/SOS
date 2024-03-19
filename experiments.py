@@ -37,7 +37,7 @@ Tigth_analysis=False
 
 #Type of summary and plots
 Plot_Worst=False
-Summary="Both" #"Average", "Worst"
+Summary="Average"#"Both" #"Average", #"Worst"
 
 #Modyfy to consider subset scenarios:
 #Distributions=["log_normal"]
@@ -60,3 +60,5 @@ for distribution in Distributions:
     convert_all_both(Summary,Tigth_analysis,fixed_release_par,upper_release_par,upper_we,NP,MP,[distribution],upper_mean,Delta_try)
     for method in ["DSOS","RSOS"]:
         make_plot(NP,MP,distribution,upper_mean,method, Tigth_analysis,fixed_release_par,upper_release_par,upper_we,Plot_Worst,alpha_DSOS, Delta_try)
+
+
