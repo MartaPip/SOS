@@ -17,22 +17,24 @@ def run_experiment(m,n,distribution,mean,alpha_DSOS,Tigth_analysis,fixed_release
     ###############################################################################################################################
     ####################################################INPUT:#####################################################################
     #m,n               = numbers machines and jobs in the simulation
-    #distribution      = processing time distribution  in the simulation 
-    #mean              = Upper bound on mean of the processing time distribution
+    #distribution      = jobs' processing time distribution in the simulation 
+    #mean              = upper bound on mean of the processing time distribution
     #alpha_DSOS        = fixed value \alpha in the DSOS algorith, usually golden_ratio-1
 
     #Tigth_analysis    = TRUE if the upper bound on the release times depends on m
     #fixed_release_par = TRUE if the upper bound on the release times is indipendent from m and n
-    #upper_release_par = Parameter influencing upper bound on release time
-    #upper_we          = uppe bound on jobs' weigths
+    #upper_release_par = parameter influencing upper bound on release time
+    #upper_we          = upper bound on jobs' weights
 
-    #instances         = number of istance considere in the simulation
-    #realizations_p    = number realizations of processing times considered for each istance
-    #Delta_try=10      = Parameter influencing the coefficint of varition for the log-normal distribution
+    #instances         = number of instance considered in the simulation
+    #realizations_p    = number realizations of processing times considered for each instance
+
+    #Delta_try=10      = parameter influencing the coefficint of varition for the log-normal distribution
 
 
     ####################################################OUTPUT:#####################################################################
-    #Data frame stored in the Result folder containg the objective value of the RSOS algorith, DSOS algorithm, and the 2 lower bounds for all the instances and realizations
+    #Dataframe stored in the Result folder containg the objective value of the RSOS algorithm, DSOS algorithm, 
+    # and the value of 2 lower bounds for each the instances and realizations
     ################################################################################################################################
     np.random.seed(10)
     random.seed(10)
@@ -104,7 +106,8 @@ def run_experiment(m,n,distribution,mean,alpha_DSOS,Tigth_analysis,fixed_release
                 for k in range(n): Jobs[k].processing=Jobs[k].expected
                     
             #Run RSOS and DSOS on simulated data
-            #NOTE: For every realization of the same istance we compute the same lower bounds since the data necessary to construct the LP schedule is the same. 
+            #NOTE: For every realization of the jobs' processing times in the same istance we compute the same lower bounds.
+            # In fact,  the data necessary to constructthe LP schedule is indipendenr of the jobs' processing times realization. 
             total_RSOS,total_DSOS,total_LR,basic_LB=run_one_both_fast(Jobs,m,alpha_DSOS)
             result_istance.append([total_RSOS,total_DSOS,total_LR,basic_LB])
         results.append(result_istance)

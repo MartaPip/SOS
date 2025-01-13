@@ -1,7 +1,3 @@
-#TO DO: try machine depdendent release dates U(1,tigness_par*n*job_par/m) done
-#TO DO maybe: try comoparing different policies
-#TO DO: improve efficiency for the virtual single machine
-
 import pandas as pd
 import numpy as np
 import math
@@ -25,7 +21,7 @@ Printing=False
 
 
 
-################################################ adapt parameters for simulations################################################à
+################################################ adapt parameters for simulations ################################################à
 
 alpha_DSOS=golden_ratio-1
 Delta_try=10
@@ -37,13 +33,15 @@ Tigth_analysis=False
 
 #Type of summary and plots
 Plot_Worst=False
-Summary="Average"#"Both" #"Average", #"Worst"
+Summary="Average" #"Both" #"Average", #"Worst"
 
 #Modyfy to consider subset scenarios:
-#Distributions=["log_normal"]
+
 #simulation parametrs
+#Distributions=["log_normal"]
 #N=[1000]
 #M=[1,2,5,10]
+
 #plot parameters
 MP=M
 NP=N
